@@ -1,0 +1,11 @@
+#pixmap_path "icons"
+style "icon-style"
+{
+
+  
+  stock["gtk-zoom-in"] = {{ "gtk-zoom-in.png", *, *, * }}
+  stock["gtk-zoom-out"] = {{ "gtk-zoom-out.png", *, *, * }}
+
+ 
+}
+class "GtkWidget" style "icon-style"

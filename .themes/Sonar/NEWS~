@@ -1,0 +1,20 @@
+Allan Caeg's 2nd Patch
+ - reverted to old bold panel settings due to a window list bug
+ - removed the bold settings of clock-applet-button, because as perfectska04 stated, the panel would look inconsistent if not all panel applets are set to a bold font
+
+Allan Caeg's Patch
+ - removed unnecessary scrollbar roundness value
+ - made all panel applet fonts bold and removed all applet-specific codes
+ - added secondary backward stepper
+
+v 11.2.3:
+ - better contrast for disable menu items (bug #533320)
+ - better contrast for unfocudes window title and icons
+ 
+v 11.2.2:
+ - less whitespace in the titlebar (bug #520020)
+ - special case a broken panel applet (bug #528786)
+
+v 11.2.1:
+
+ - theme user switching applet. Bug #501587

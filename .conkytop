@@ -1,0 +1,35 @@
+
+# Conky configuration
+background no
+#use_xft yes
+#xftfont Bitstream Vera Sans:size=9
+total_run_times 0
+update_interval 2
+#own_window yes
+#own_window_type normal
+#own_window_transparent yes
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#double_buffer yes
+#draw_shades no
+#draw_outline no
+#draw_borders no
+#draw_graph_borders no
+#stippled_borders 0
+#border_margin 0
+#border_width 0
+#default_color e0e0e0
+#default_shade_color 262729
+#default_outline_color 262729
+#alignment top_left
+#gap_x 15
+#gap_y 35
+#override_utf8_locale yes
+#use_spacer yes
+#minimum_size 600 16
+#maximum_width 1245 16
+out_to_console yes
+out_to_x no
+use_spacer none
+
+TEXT
+${exec /home/yigit/scripts/.rhythmbox.sh} | ^fg()cpu ^fg()$cpu% ^fg()bat ^fg()${battery_percent BAT0}% ^fg()| ${time %d.%b %H:%M}

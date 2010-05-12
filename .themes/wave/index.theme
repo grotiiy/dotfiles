@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=wave
+Type=X-GNOME-Metatheme
+Comment=
+
+[X-GNOME-Metatheme]
+GtkTheme=Wave
+MetacityTheme=Wave
+IconTheme=elementary_2.2
+CursorTheme=DMZ
+CursorSize=18

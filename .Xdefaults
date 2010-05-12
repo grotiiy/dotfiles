@@ -1,0 +1,7 @@
+
+
+
+URxvt*background: [0]#262729
+URxvt*foreground: #a1a1a1
+URxvt.scrollBar: false
+URxvt*font: xft: Inconsolata:pixelsize=12

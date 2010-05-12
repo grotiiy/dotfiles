@@ -1,0 +1,5 @@
+#/bin/bash
+
+curl -s http://www.absoluteradio.co.uk/onair/ | grep -o "On-air: [[:alpha:]]* [[:alpha:]]*" | xargs -0 notify-send --icon=/home/yigit/.scripts/vr.gif "Absolute Radio"
+
+

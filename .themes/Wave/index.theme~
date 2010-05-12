@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=2.0
+Encoding=UTF-8
+Name=Elegance2
+Type=X-GNOME-Metatheme
+Comment=Black and shiny
+Name[en]=Elegance2
+
+[X-GNOME-Metatheme]
+GtkTheme=Elegance2
+MetacityTheme=Elegance2

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=brit
+Type=X-GNOME-Metatheme
+Comment=
+
+[X-GNOME-Metatheme]
+GtkTheme=Elegant Brit
+MetacityTheme=Elegant Brit
+IconTheme=gnome-carbonite
+GtkColorScheme=fg_color:#ffffffffffff,bg_color:#a9a9a4a49c9c,text_color:#000000000000,base_color:#ffffffffffff,selected_fg_color:#eeeeeeeeeeee,selected_bg_color:#29af6b17e38a,tooltip_fg_color:#1f1f18181616,tooltip_bg_color:#fffffefea7a7
+CursorTheme=DMZ-White
+CursorSize=18

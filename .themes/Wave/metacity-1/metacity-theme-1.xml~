@@ -1,0 +1,562 @@
+<?xml version="1.0"?>
+<metacity_theme>
+<info>
+  <name>AquaTunes</name>
+  <author>AlexR1</author>
+  <copyright>GPL</copyright>
+  <date>July 2007</date>
+  <description>iTunes style</description>
+</info>
+
+<frame_geometry name="normal" rounded_top_left="true" rounded_top_right="true" rounded_bottom_left="false" rounded_bottom_right="false">
+  <distance name="left_width" value="1"/>
+  <distance name="right_width" value="1"/>
+  <distance name="bottom_height" value="1"/>
+  <distance name="left_titlebar_edge" value="7"/>
+  <distance name="right_titlebar_edge" value="1"/>
+  <distance name="button_width" value="20"/>
+  <distance name="button_height" value="23"/>
+  <distance name="title_vertical_pad" value="0"/>
+  <border name="title_border" left="0" right="0" top="0" bottom="0"/>
+  <border name="button_border" left="0" right="0" top="0" bottom="0"/>
+</frame_geometry>
+
+<frame_geometry name="maximized">
+  <distance name="left_width" value="0"/>
+  <distance name="right_width" value="0"/>
+  <distance name="bottom_height" value="0"/>
+  <distance name="left_titlebar_edge" value="6"/>
+  <distance name="right_titlebar_edge" value="1"/>
+  <distance name="button_width" value="20"/>
+  <distance name="button_height" value="23"/>
+  <distance name="title_vertical_pad" value="0"/>
+  <border name="title_border" left="0" right="0" top="0" bottom="0"/>
+  <border name="button_border" left="0" right="0" top="0" bottom="0"/>
+</frame_geometry>
+
+<frame_geometry name="border" has_title="false">
+	  <distance name="left_width" value="1"/>
+	  <distance name="right_width" value="1"/>
+	  <distance name="bottom_height" value="1"/>
+	  <distance name="left_titlebar_edge" value="6"/>
+	  <distance name="right_titlebar_edge" value="1"/>
+	  <distance name="button_width" value="0"/>
+	  <distance name="button_height" value="0"/>
+	  <distance name="title_vertical_pad" value="5"/>
+	  <border name="title_border" left="0" right="0" top="0" bottom="0"/>
+	  <border name="button_border" left="0" right="0" top="0" bottom="0"/>
+</frame_geometry>
+
+
+
+<!-- Border and Titlebar -->
+<draw_ops name="title_tile">
+  <image filename="left-side.png" x="0" y="0" width="object_width" height="height"/>
+  <image filename="title-bar.png" x="5" y="0" width="width" height="height"/>
+  <image filename="right-side.png" x="width - object_width" y="0" width="object_width" height="height"/>
+</draw_ops>
+
+<draw_ops name="title_shade">
+  <image filename="left-side-shaded.png" x="0" y="0" width="object_width" height="height"/>
+  <image filename="title-bar-shaded.png" x="5" y="0" width="width" height="height"/>
+  <image filename="right-side-shaded.png" x="width - object_width" y="0" width="object_width" height="height"/>
+</draw_ops>
+
+<draw_ops name="bottom-edge">
+<image filename="bottom-left.png" x="0" y="0" width="object_width" height="height" />
+<image filename="bottom-edge.png" x="5" y="0" width="width - 1" height="height" />
+<image filename="bottom-right.png" x="width - object_width" y="0" width="object_width" height="height" />
+</draw_ops>
+
+<draw_ops name="left-edge">
+<image filename="left-edge.png" x="0" y="0" width="5" height="height" />
+</draw_ops>
+
+<draw_ops name="left-edge-inactive">
+<image filename="left-edge-inactive.png" x="0" y="0" width="5" height="height" />
+</draw_ops>
+
+<draw_ops name="right-edge">
+<image filename="right-edge.png" x="width - 5" y="0" width="5" height="height" />
+</draw_ops>
+
+<draw_ops name="right-edge-inactive">
+<image filename="right-edge-inactive.png" x="width - 5" y="0" width="5" height="height" />
+</draw_ops>
+
+<draw_ops name="bottom-edge-inactive">
+<image filename="bottom-edge-inactive.png" x="5" y="0" width="width - 1" height="height" />
+<image filename="bottom-left-inactive.png" x="0" y="0" width="object_width" height="height" />
+<image filename="bottom-right-inactive.png" x="width - object_width" y="0" width="object_width" height="height" />
+</draw_ops>
+
+<!-- Inactive style -->
+<frame_style name="normal" geometry="normal">
+
+  <piece position="title">
+    <draw_ops>
+      <title color="#f7f7f7" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+      <title color="#f7f7f7" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+    </draw_ops>
+  </piece>
+  
+  <piece position="left_edge">
+    <draw_ops>
+      <include name="left-edge" />
+<include name="left-edge-inactive" />
+    </draw_ops>
+  </piece>
+
+ <piece position="right_edge">
+    <draw_ops>
+      <include name="right-edge" />
+<include name="right-edge-inactive" />
+    </draw_ops>
+ </piece>
+
+<piece position="bottom_edge">
+    <draw_ops>
+<include name="bottom-edge" />
+     <include name="bottom-edge-inactive" />
+    </draw_ops>
+</piece>  
+
+  <piece position="titlebar">
+    <draw_ops>
+     <!-- <include name="title_tile"/> -->
+ <image filename="left-side-inactive.png" x="0" y="0" width="object_width" height="height"/>
+  <image filename="title-bar-inactive.png" x="5" y="0" width="width - 5" height="height"/>
+  <image filename="right-side-inactive.png" x="width - object_width" y="0" width="object_width" height="height"/>
+    </draw_ops>
+  </piece>
+
+<!-- na ez az inaktiv -->
+<button function="close" state="normal">
+    <draw_ops>
+      <image filename="button-close-inactive.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="pressed">
+    <draw_ops>
+      <image filename="button-close-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="prelight">
+    <draw_ops>
+      <image filename="button-close-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="normal">
+    <draw_ops>
+      <image filename="button-minimize-inactive.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="pressed">
+    <draw_ops>
+      <image filename="button-minimize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="minimize" state="prelight">
+    <draw_ops>
+      <image filename="button-minimize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="normal">
+    <draw_ops>
+      <image filename="button-inactive.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="pressed">
+    <draw_ops>
+      <image filename="button-maximize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="maximize" state="prelight">
+    <draw_ops>
+      <image filename="button-maximize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="normal">
+    <draw_ops>
+      <image filename="menubutton-inactive.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="pressed">
+    <draw_ops>
+      <image filename="menubutton-pressed.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+<button function="menu" state="prelight">
+    <draw_ops>
+      <image filename="menubutton-prelight.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+</frame_style>
+
+
+<!-- Active (focused) shaded style -->
+<frame_style name="normal_shaded" geometry="normal" parent="normal">
+</frame_style>
+
+<!-- Active (focused) style -->
+<frame_style name="focused" geometry="normal">
+
+  <piece position="title">
+    <draw_ops>
+      <title color="#ffffff" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+      <title color="#ffffff" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+    </draw_ops>
+  </piece>
+
+  <piece position="titlebar">
+    <draw_ops>
+      <include name="title_tile"/>
+    </draw_ops>
+  </piece>
+  
+  <piece position="left_edge">
+    <draw_ops>
+      <include name="left-edge" />
+    </draw_ops>
+  </piece>
+
+ <piece position="right_edge">
+    <draw_ops>
+      <include name="right-edge" />
+    </draw_ops>
+ </piece>
+
+<piece position="bottom_edge">
+    <draw_ops>
+     <include name="bottom-edge" />
+    </draw_ops>
+</piece>    
+
+  <button function="close" state="normal">
+    <draw_ops>
+      <image filename="button-close.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="pressed">
+    <draw_ops>
+      <image filename="button-close-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="prelight">
+    <draw_ops>
+      <image filename="button-close-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="normal">
+    <draw_ops>
+      <image filename="button-minimize.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="pressed">
+    <draw_ops>
+      <image filename="button-minimize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="minimize" state="prelight">
+    <draw_ops>
+      <image filename="button-minimize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="normal">
+    <draw_ops>
+      <image filename="button-maximize.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="pressed">
+    <draw_ops>
+      <image filename="button-maximize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="maximize" state="prelight">
+    <draw_ops>
+      <image filename="button-maximize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="normal">
+    <draw_ops>
+      <image filename="menubutton.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="pressed">
+    <draw_ops>
+      <image filename="menubutton-pressed.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+<button function="menu" state="prelight">
+    <draw_ops>
+      <image filename="menubutton-prelight.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+</frame_style>
+
+<!-- Active (focused) shaded style -->
+<frame_style name="focused_shaded" geometry="normal" parent="focused">
+  <piece position="titlebar">
+    <draw_ops>
+      <include name="title_shade"/>
+    </draw_ops>
+  </piece>
+</frame_style>
+
+<!-- Inactive style -->
+<frame_style name="maximized-i" geometry="maximized">
+
+  <piece position="title">
+    <draw_ops>
+      <title color="#f7f7f7" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+      <title color="#f7f7f7" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+    </draw_ops>
+  </piece>
+
+  <piece position="titlebar">
+    <draw_ops>
+     <!-- <include name="title_tile"/> -->
+  <image filename="title-bar-inactive.png" x="0" y="0" width="width" height="height"/>
+    </draw_ops>
+  </piece>
+
+<!-- na ez az inaktiv -->
+<button function="close" state="normal">
+    <draw_ops>
+      <image filename="button-close-inactive.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="pressed">
+    <draw_ops>
+      <image filename="button-close-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="prelight">
+    <draw_ops>
+      <image filename="button-close-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="normal">
+    <draw_ops>
+      <image filename="button-minimize-inactive.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="pressed">
+    <draw_ops>
+      <image filename="button-minimize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="minimize" state="prelight">
+    <draw_ops>
+      <image filename="button-minimize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="normal">
+    <draw_ops>
+      <image filename="button-inactive.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="pressed">
+    <draw_ops>
+      <image filename="button-maximize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="maximize" state="prelight">
+    <draw_ops>
+      <image filename="button-maximize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="normal">
+    <draw_ops>
+      <image filename="menubutton-inactive.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="pressed">
+    <draw_ops>
+      <image filename="menubutton-pressed.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+<button function="menu" state="prelight">
+    <draw_ops>
+      <image filename="menubutton-prelight.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+</frame_style>
+
+
+<!-- Active (focused) style -->
+<frame_style name="maximized" geometry="maximized">
+
+  <piece position="title">
+    <draw_ops>
+      <title color="#ffffff" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+      <title color="#ffffff" x="((width - title_width) / 2) + 1"  y="((height - title_height) / 3) + 2"/>
+    </draw_ops>
+  </piece>
+
+  <piece position="titlebar">
+    <draw_ops>
+  <image filename="title-bar.png" x="0" y="0" width="width" height="height"/>
+    </draw_ops>
+  </piece>
+
+  <button function="close" state="normal">
+    <draw_ops>
+      <image filename="button-close.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="pressed">
+    <draw_ops>
+      <image filename="button-close-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="close" state="prelight">
+    <draw_ops>
+      <image filename="button-close-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="normal">
+    <draw_ops>
+      <image filename="button-minimize.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="minimize" state="pressed">
+    <draw_ops>
+      <image filename="button-minimize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="minimize" state="prelight">
+    <draw_ops>
+      <image filename="button-minimize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="normal">
+    <draw_ops>
+      <image filename="button-maximize.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="maximize" state="pressed">
+    <draw_ops>
+      <image filename="button-maximize-pressed.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+<button function="maximize" state="prelight">
+    <draw_ops>
+      <image filename="button-maximize-prelight.png" x="0" y="5" width="15" height="15"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="normal">
+    <draw_ops>
+      <image filename="menubutton.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+  <button function="menu" state="pressed">
+    <draw_ops>
+      <image filename="menubutton-pressed.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+
+<button function="menu" state="prelight">
+    <draw_ops>
+      <image filename="menubutton-prelight.png" x="0" y="5" width="12" height="13"/>
+    </draw_ops>
+  </button>
+</frame_style>
+
+<frame_style_set name="normal">
+<frame focus="yes" state="shaded" style="focused_shaded"/>
+<frame focus="yes" state="normal" resize="both" style="focused"/>
+<frame focus="yes" state="maximized" style="maximized"/>
+<frame focus="yes" state="maximized_and_shaded" style="maximized"/>
+<frame focus="no" state="normal" resize="both" style="normal"/>
+<frame focus="no" state="shaded" style="normal_shaded"/>
+<frame focus="no" state="maximized" style="maximized-i"/>
+<frame focus="no" state="maximized_and_shaded" style="maximized-i"/>
+</frame_style_set>
+
+<window type="normal" style_set="normal"/>
+<window type="dialog" style_set="normal"/>
+<window type="modal_dialog" style_set="normal"/>
+<window type="menu" style_set="normal"/>
+<window type="utility" style_set="normal"/>
+<window type="border" style_set="normal"/>
+
+<menu_icon function="maximize" state="normal">
+  <draw_ops>
+    <image filename="button-maximize.png" 
+           x="0"
+           y="0"
+           width="object_width" height="object_height"/>
+  </draw_ops>
+</menu_icon>
+
+<menu_icon function="close" state="normal">
+  <draw_ops>
+    <image filename="button-close.png" 
+           x="0"
+           y="0"
+           width="object_width" height="object_height"/>
+  </draw_ops>
+</menu_icon>
+
+<menu_icon function="minimize" state="normal">
+  <draw_ops>
+    <image filename="button-minimize.png" 
+           x="0"
+           y="0"
+           width="object_width" height="object_height"/>
+  </draw_ops>
+</menu_icon>
+
+<menu_icon function="unmaximize" state="normal">
+  <draw_ops>
+  </draw_ops>
+</menu_icon>
+
+
+</metacity_theme>

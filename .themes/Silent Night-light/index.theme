@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Silent Night-light
+Comment=Light Theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Silent Night-light
+MetacityTheme=Silent Night-light
+IconTheme=Smokikon_v09
+CursorTheme=Shere_Khan_X

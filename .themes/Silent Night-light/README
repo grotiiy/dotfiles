@@ -1,0 +1,14 @@
+HOW TO INSTALL
+
+Copy Dark_Star theme to your /home/USERNAME/.themes folder, or /usr/share/themes folders.
+
+GNOME PANEL TWEAKS
+
+If you want the panel to look as in my screenshot, set panel size to 24 pixels. To get a better look of the menu (the bar with the entries called Applications/Places/System), move the menu a little to the right.
+
+I suggest you use the Cure font for the panel. It better fits the panel menu and its size is fixed. For this, copy the font (included in the package you downloaded) into your /home/USERNAME/.fonts folder. If you don\'t have this folder, create it. Don\'t forget the dot at the beginning of the folder name in order to make it a hidden folder. If you can\'t see the folder you\'ve just created, press ctrl+h and you will see your hidden folders. Now open a terminal and run fc-cache -fv. Go to System>Preferences>Appearance>Fonts, and set Cure as the default font for Applications and Window title.
+
+You have to remove start here icon from panelbar, go to System>Preferences>Appearance>Interface and uncheck “Show icons in menus”. You can also choose “Icons only” in the dropdown menu.
+
+With this theme, the Gnome panel will look nice only if placed at the top or the bottom of the screen, not on the right or left. If you want to use your own panel background, go to /home/USERNAME/.themes/Silent_Night/gtk-2.0, open the gtkrc file and comment the include “panel.rc” line, that is, add a # at the beginning of this line.
+

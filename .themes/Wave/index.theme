@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Wave
+Type=X-GNOME-Metatheme
+Comment=Clean and blue theme, ispired by google wave interface.
+Name[en]=Wave
+
+[X-GNOME-Metatheme]
+GtkTheme=Wave
+MetacityTheme=Wave
