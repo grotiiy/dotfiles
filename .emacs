@@ -17,12 +17,7 @@
 (setq next-line-add-newlines nil)
 
 
-;;to set the cursor color
-(set-cursor-color "red")
-
-;;to set foreground color to white
-(set-foreground-color "white")
-
+;; support for mouse wheel
 (mwheel-install)
 
 
@@ -45,12 +40,10 @@
  '(custom-variable-tag ((((class color) (background dark)) (:foreground "#1144dd" :weight bold))))
  '(linum ((t (:background "#050505" :foreground "#333")))))
 
-;;(tool-bar-mode -1)
 
+;; set the color theme
 (require 'color-theme)
 (setq color-theme-is-global t)
-;;(load-file "/home/yigit/inspiration675249.el")
-;;(color-theme-inspiration-675249)
 (color-theme-arjen)
 
 
@@ -60,10 +53,10 @@
 
 (setq-default py-indent-offset 2)
 
-;;(setq frame-title-format "emacs - %b - %f")
+
 (global-hl-line-mode 1)
-;;(setq hl-line-sticky-flag t)
-(set-face-background 'hl-line "#1a1a1a")
+(setq hl-line-sticky-flag t)
+(set-face-background 'hl-line "#111111")
 
 
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
@@ -73,3 +66,8 @@
 
 (add-hook 'python-mode-hook
   (lambda() (linum-mode 1)))
+
+(global-set-key (kbd "C-z") 'undo) ; Ctrl+z
+(global-set-key (kbd "C-S-z") 'redo) ;  Ctrl+Shift+z
+
+(column-number-mode 1)
