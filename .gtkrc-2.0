@@ -1,0 +1,15 @@
+# DO NOT EDIT!  This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine
+
+gtk-theme-name="Clearlooks Wine Dark"
+gtk-icon-theme-name="gnome-tribute"
+gtk-font-name="Droid Sans 8"
+
+style "user-font" {
+        font_name = "Droid Sans 8"
+}
+widget_class "*" style "user-font"
+
+
+gtk-toolbar-style=0
+include "/home/yigit/.gtkrc-2.0.mine"

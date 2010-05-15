@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+## ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -107,3 +107,16 @@ PROMPT_COMMAND='PS1="\[\033[0;33m\][\!]\`if [[ \$? = "0" ]]; then echo "\\[\\033
 
 alias eog='gpicview'
 alias nautilus='pcmanfm'
+alias altitude='/pkd/programlar/altitude/altitude'
+alias empath='pidgin'
+alias gnome-terminal='gnome-terminal --disable-factory'
+
+alias brightness='sudo nano /sys/class/backlight/acpi_video0/brightness'
+
+
+PATH=$PATH:/sbin
+
+
+EDITOR="emacsclient -t"
+VISUAL="emacsclient -t" 
+alias nano="emacsclient -t"

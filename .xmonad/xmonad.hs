@@ -36,6 +36,7 @@ myNormalBGColor     = "#262729"
 myFocusedBGColor    = "#414141"
 myNormalFGColor     = "#a1a1a1"
 myFocusedFGColor    = "#cccccc"
+myBorderColor		= "#0000ff"
 myUrgentFGColor     = "#ff0000"
 myUrgentBGColor     = myNormalBGColor
 mySeperatorColor    = "#2e3436"
@@ -58,7 +59,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
  
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu -nb black -nf darkgrey -sf red -sb black -fn -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1` && eval \"exec $exe\"")
  
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -116,6 +117,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+
+    -- XF86AudioMute
+    , ((0 , 0x1008ff12), spawn "amixer -q set Master toggle")
+    -- XF86AudioLowerVolume
+    , ((0 , 0x1008ff11), spawn "amixer -q set Master 1- unmute")
+    -- XF86AudioRaiseVolume
+    , ((0 , 0x1008ff13), spawn "amixer -q set Master 1+ unmute")
+    --XF86Launch1 :1008FF41
+    , ((0 , 0x1008FF41), spawn "rhythmbox")
+
+    -- absolute radio
+    , ((modm,               xK_a     ), spawn "rhythmbox-client --play-uri http://mp3-vr-128.as34763.net:80/")
+    -- uppsala radio
+    , ((modm,               xK_u     ), spawn "rhythmbox-client --play-uri http://109.74.198.181:8000/first")
  
     -- Restart xmonad
     , ((modm              , xK_q     ), restart "xmonad" True)
@@ -139,10 +154,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
  
-statusBarCmd= "dzen2 -p -h 16 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 1000 -sa c -fn '" ++ myFont ++ "'"
+statusBarCmd= "dzen2 -p -h 18 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 1000 -sa c -fn '" ++ myFont ++ "'"
 
-myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '900' -y '0' -h '16' -w '600' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
-myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '16' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' "
+myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '900' -y '0' -h '18' -w '600' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
+myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '18' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' "
  
 -- Main {{{
 main = do
@@ -151,9 +166,9 @@ main = do
     xmonad $ withUrgencyHook NoUrgencyHook $defaultConfig {
         modMask = mod4Mask,
         borderWidth = 1,
-        terminal = "gnome-terminal",
+        terminal = "urxvt -imlocale en-US.UTF-8",
         normalBorderColor = myNormalBGColor,
-        focusedBorderColor = myFocusedFGColor,
+        focusedBorderColor = myBorderColor,
         --defaultGaps = [(16,0,0,0)],
         manageHook = manageHook defaultConfig <+> myManageHook,
         layoutHook = globalLayout,
@@ -169,12 +184,13 @@ main = do
  
 -- Window rules (floating, tagging, etc) {{{
 myManageHook = composeAll [
-        className   =? "Google-chrome"        --> doF(W.shift "www"),
-        className   =? "Pidgin"           --> doF(W.shift "chat"),
-        className   =? "Empathy"           --> doF(W.shift "chat"),
+        className   =? "Google-chrome"       --> doF(W.shift "www"),
+        className   =? "Pidgin"              --> doF(W.shift "chat"),
+        className   =? "Empathy"             --> doF(W.shift "chat"),
         className   =? "Rhythmbox"           --> doF(W.shift "music"),
-	className   =? "Transmission"        --> doF(W.shift "transmission")
-
+	className   =? "Transmission"        --> doF(W.shift "transmission"),
+	className   =? "Skype"		     --> doF(W.shift "chat"),
+	className   =? "Trayer"              --> doIgnore 
     ]
 -- }}}
  

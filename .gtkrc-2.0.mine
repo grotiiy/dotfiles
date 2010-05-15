@@ -1,0 +1,17 @@
+gtk-icon-theme-name="gnome-tribute"
+gtk-icon-sizes="gtk-menu=16,16:\
+                gtk-button=16,16:\
+                gtk-small-toolbar=16,16:\
+                gtk-large-toolbar=16,16:\
+                gtk-dnd=16,16:\
+                gtk-dialog=16,16"
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+gtk-can-change-accels=1 
+gtk-menu-bar-popup-delay=0
+gtk-menu-popdown-delay=0 
+gtk-menu-popup-delay=0 
+gtk-xft-antialias=1
+gtk-xft-hinting = 1
+gtk-xft-hintstyle="full"
+gtk-xft-rgba="rgb"
+gtk-xft-dpi=96

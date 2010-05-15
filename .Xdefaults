@@ -1,7 +1,34 @@
 
-
-
 URxvt*background: [0]#262729
-URxvt*foreground: #a1a1a1
+URxvt*foreground: #ffffff
+URxvt*termName: rxvt-256color 
 URxvt.scrollBar: false
-URxvt*font: xft: Inconsolata:pixelsize=12
+URxvt*font: xft: Inconsolata:size=10
+Xft.antialias: 1
+#Xft.hinting:    1
+#Xft.hintstyle:  hintfull
+URxvt*termName: rxvt-unicode
+Xft.antialias: 1
+Xft.dpi: 96.000000
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.rgba: rgb
+
+
+URxvt*color0:	#000000
+URxvt*color1:	#cc0000
+URxvt*color2:	#00a800
+URxvt*color3:	#a8a800
+URxvt*color4:	#5555a8
+URxvt*color5:	#a800a8
+URxvt*color6:	#00a8a8
+URxvt*color7:	#a8a8a8
+
+URxvt*color8:	#000054
+URxvt*color9:	#ff0054
+URxvt*color10:	#00ff54
+URxvt*color11:	#cccc54
+URxvt*color12:	#aaaaff
+URxvt*color13:	#ff00ff
+URxvt*color14:	#00ffff
+URxvt*color15:	#ffffff
