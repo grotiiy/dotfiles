@@ -33,7 +33,7 @@ if [ -x /usr/bin/nm-applet ] ; then
 fi
 
 # Launch WM
-exec xmonad
+exec ssh-agent xmonad
 
 
 #exec ck-launch-session xmonad

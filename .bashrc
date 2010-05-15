@@ -1,4 +1,4 @@
-## ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -120,3 +120,4 @@ PATH=$PATH:/sbin
 EDITOR="emacsclient -t"
 VISUAL="emacsclient -t" 
 alias nano="emacsclient -t"
+alias emac="emacsclient -t"
