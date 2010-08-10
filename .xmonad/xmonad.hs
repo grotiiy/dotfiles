@@ -17,10 +17,13 @@ import XMonad.Layout.IM
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.Reflect
 import XMonad.Layout.Combo
+import XMonad.Layout.TwoPane
+import XMonad.Layout.WindowNavigation
+
 
 import XMonad.Hooks.ManageDocks
 
-
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog   (PP(..), dynamicLogWithPP, wrap, defaultPP)
 import XMonad.Hooks.UrgencyHook
 import XMonad.Util.Run (spawnPipe)
@@ -36,7 +39,7 @@ myNormalBGColor     = "#262729"
 myFocusedBGColor    = "#414141"
 myNormalFGColor     = "#a1a1a1"
 myFocusedFGColor    = "#cccccc"
-myBorderColor		= "#0000ff"
+myBorderColor		= "#FF350D"
 myUrgentFGColor     = "#ff0000"
 myUrgentBGColor     = myNormalBGColor
 mySeperatorColor    = "#2e3436"
@@ -44,7 +47,7 @@ mySeperatorColor    = "#2e3436"
 -- Icon packs can be found here:
 -- http://robm.selfip.net/wiki.sh/-main/DzenIconPacks
 myBitmapsDir        = "/home/yigit/.share/icons/dzen"
-myFont              = "-*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-1"
+myFont              = "-*-terminus-medium-*-*-*12-*-*-*-*-*-u"
 myxftFont	    = "xft:Sans:pixelsize=8"
 -- }}}
 
@@ -59,11 +62,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
  
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu -nb black -nf darkgrey -sf red -sb black -fn -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1` && eval \"exec $exe\"")
- 
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
- 
+    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu -nb black -nf darkgrey -sf red -sb black -fn -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1` && eval \"exec $exe\"") 
     -- close focused window 
     , ((modm .|. shiftMask, xK_c     ), kill)
  
@@ -134,6 +133,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     -- Restart xmonad
     , ((modm              , xK_q     ), restart "xmonad" True)
+    
+    -- Combined Layout
+    , ((modm,                 xK_Right), sendMessage $ Go R)
+    , ((modm,                 xK_Left ), sendMessage $ Go L)
+    , ((modm,                 xK_Up   ), sendMessage $ Go U)
+    , ((modm,                 xK_Down ), sendMessage $ Go D)
+    , ((modm .|. controlMask, xK_Right), sendMessage $ Swap R)
+    , ((modm .|. controlMask, xK_Left ), sendMessage $ Swap L)
+    , ((modm .|. controlMask, xK_Up   ), sendMessage $ Swap U)
+    , ((modm .|. controlMask, xK_Down ), sendMessage $ Swap D)
     ]
     ++
  
@@ -154,9 +163,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
  
-statusBarCmd= "dzen2 -p -h 18 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 1000 -sa c -fn '" ++ myFont ++ "'"
+statusBarCmd= "dzen2 -p -h 16 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 900 -sa c -fn '" ++ myFont ++ "'"
 
-myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '900' -y '0' -h '18' -w '600' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
+myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '900' -y '0' -h '16' -w '640' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
 myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '18' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' "
  
 -- Main {{{
@@ -166,7 +175,7 @@ main = do
     xmonad $ withUrgencyHook NoUrgencyHook $defaultConfig {
         modMask = mod4Mask,
         borderWidth = 1,
-        terminal = "urxvt -imlocale en-US.UTF-8",
+        terminal = "urxvtc -imlocale en-US.UTF-8",
         normalBorderColor = myNormalBGColor,
         focusedBorderColor = myBorderColor,
         --defaultGaps = [(16,0,0,0)],
@@ -177,20 +186,26 @@ main = do
         keys = myKeys
     }
     where
-        globalLayout = avoidStruts (tiled ||| Mirror tiled ||| Full) ||| Full
+        globalLayout = avoidStruts (tiled ||| Mirror tiled ||| Full ||| threeColMid ||| combine) ||| Full
 
-        tiled = ThreeCol 1 (3/100) (1/2)
+        tiled = ThreeCol 1 (3/100) (1/3)
+        threeColMid =  ThreeColMid 1 (50/100) (1/3) 
+        combine = combineTwo (TwoPane 0.5 0.5) (tiled) (tiled)
 -- }}}
  
 -- Window rules (floating, tagging, etc) {{{
 myManageHook = composeAll [
-        className   =? "Google-chrome"       --> doF(W.shift "www"),
+        className   =? "google-chrome"       --> doF(W.shift "www"),
         className   =? "Pidgin"              --> doF(W.shift "chat"),
+        className 	=? "Gwibber"             --> doF(W.shift "chat"),
         className   =? "Empathy"             --> doF(W.shift "chat"),
         className   =? "Rhythmbox"           --> doF(W.shift "music"),
-	className   =? "Transmission"        --> doF(W.shift "transmission"),
-	className   =? "Skype"		     --> doF(W.shift "chat"),
-	className   =? "Trayer"              --> doIgnore 
+		className   =? "Transmission"        --> doF(W.shift "transmission"),
+        className   =? "Skype"               --> doF(W.shift "chat"),
+        className   =? "Trayer"              --> doIgnore,
+		className 	=? "Panel"				 --> doIgnore,
+		resource 	=? "trayer" 			 --> doIgnore,
+		isFullscreen   						 --> doFullFloat
     ]
 -- }}}
  
