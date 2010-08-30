@@ -31,7 +31,9 @@
  '(scroll-bar-mode (quote right))
  '(show-paren-mode t)
  '(tab-width 4)
- '(tooltip-mode nil t))
+ '(tooltip-mode nil t)
+ '(twitter-password "ahmet1")
+ '(twitter-username "yiit"))
 ;;(custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -77,9 +79,31 @@
 
 ;;git
 
-(setq load-path (cons (expand-file-name "/usr/share/doc/git-core/contrib/emacs") load-path))
-(require 'vc-git)
-(when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
-(require 'git)
-(autoload 'git-blame-mode "git-blame"
-  "Minor mode for incremental blame for Git." t)
+;;(setq load-path (cons (expand-file-name "/usr/share/doc/git-core/contrib/emacs") load-path))
+;;(require 'vc-git)
+;;(when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
+;;(require 'git)
+;;(autoload 'git-blame-mode "git-blame"
+;;  "Minor mode for incremental blame for Git." t)
+
+
+(require 'edit-server)
+(edit-server-start)
+(setq edit-server-new-frame nil)
+
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(require 'auto-install)
+(setq auto-install-directory "~/.emacs.d/auto-install/")
+
+(autoload 'twitter-get-friends-timeline "twitter" nil t)
+(autoload 'twitter-status-edit "twitter" nil t)
+(global-set-key "\C-xt" 'twitter-get-friends-timeline)
+
+(add-hook 'twitter-status-edit-mode-hook 'longlines-mode)
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )

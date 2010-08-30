@@ -1,7 +1,7 @@
 
 # Conky configuration
 background no
-#use_xft yes
+use_xft yes
 #xftfont Bitstream Vera Sans:size=9
 total_run_times 0
 update_interval 2
@@ -32,4 +32,4 @@ out_to_x no
 use_spacer none
 
 TEXT
-${exec /home/yigit/.scripts/rhythmbox.sh} | ^fg()cpu ^fg()$cpu% ^fg()bat ^fg()${battery_percent BAT0}% ^fg()| ${time %d.%b %H:%M}
+${exec /home/yigit/.scripts/rhythmbox.sh} | ^fg()cpu ^fg()$cpu% ^fg()vol ${exec /home/yigit/.scripts/vol.sh} ${mixer} ^fg()bat ^fg()${battery_percent BAT0}% ^fg()| ${time %d %b %H:%M} 

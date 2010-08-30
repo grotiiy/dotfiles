@@ -55,6 +55,7 @@ alias nautilus='pcmanfm'
 alias altitude='/pkd/programlar/altitude/altitude'
 alias empathy='pidgin'
 alias gnome-terminal='gnome-terminal --disable-factory'
+alias top="htop"
 
 alias brightness='sudo nano /sys/class/backlight/acpi_video0/brightness'
 
@@ -68,3 +69,4 @@ alias nano="emacsclient -t"
 alias emac="emacsclient -t"
 
 export LIBGL_DRIVERS_PATH=/usr/lib32/fglrx/dri/
+
