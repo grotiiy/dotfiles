@@ -39,11 +39,13 @@ myNormalBGColor     = "#262729"
 myFocusedBGColor    = "#414141"
 myNormalFGColor     = "#a1a1a1"
 myFocusedFGColor    = "#cccccc"
-myBorderColor		= "#FF350D"
+--myBorderColor	    = "#FF350D"
+myBorderColor = "#000000"
 myUrgentFGColor     = "#ff0000"
 myUrgentBGColor     = myNormalBGColor
 mySeperatorColor    = "#2e3436"
 -- }}}
+
 -- Icon packs can be found here:
 -- http://robm.selfip.net/wiki.sh/-main/DzenIconPacks
 myBitmapsDir        = "/home/yigit/.share/icons/dzen"
@@ -53,7 +55,7 @@ myxftFont	    = "xft:Sans:pixelsize=8"
 
 -- Workspaces {{{
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["www", "general", "chat", "music", "code" ,"remote", "transmission"] ++ map show [8..9 :: Int]
+myWorkspaces = ["www", "general", "chat", "music", "code" ,"remote", "transmission", "8", "todo"] 
 -- }}}
  
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -175,8 +177,9 @@ main = do
     xmonad $ withUrgencyHook NoUrgencyHook $defaultConfig {
         modMask = mod4Mask,
         borderWidth = 1,
-        terminal = "urxvtc -imlocale en-US.UTF-8",
-        normalBorderColor = myNormalBGColor,
+        --terminal = "urxvtc -imlocale en-US.UTF-8",
+        terminal = "gnome-terminal",
+	normalBorderColor = myNormalBGColor,
         focusedBorderColor = myBorderColor,
         --defaultGaps = [(16,0,0,0)],
         manageHook = manageHook defaultConfig <+> myManageHook,
@@ -204,7 +207,10 @@ myManageHook = composeAll [
         className   =? "Skype"               --> doF(W.shift "chat"),
         className   =? "Trayer"              --> doIgnore,
 		className 	=? "Panel"				 --> doIgnore,
+		className 	=? "Tasque"				 --> doF(W.shift "todo"),
+		resource 	=? "gtodo"				 --> doF(W.shift "todo"),
 		resource 	=? "trayer" 			 --> doIgnore,
+
 		isFullscreen   						 --> doFullFloat
     ]
 -- }}}

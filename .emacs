@@ -21,33 +21,16 @@
 (mwheel-install)
 
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(blink-cursor-mode nil)
- '(cua-mode t nil (cua-base))
- '(scroll-bar-mode (quote right))
- '(show-paren-mode t)
- '(tab-width 4)
- '(tooltip-mode nil t)
- '(twitter-password "ahmet1")
- '(twitter-username "yiit"))
-;;(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- ;;'(custom-variable-tag ((((class color) (background dark)) (:foreground "#1144dd" :weight bold))))
- ;;'(linum ((t (:background "#050505" :foreground "#333")))))
-
 
 ;; set the color theme
 (require 'color-theme)
+(color-theme-initialize)
 (setq color-theme-is-global t)
+
+;;(color-theme-mistyday)
+
 (color-theme-arjen)
-(color-theme-mistyday)
+
 
 (setq inhibit-startup-message t)
 (xterm-mouse-mode)
@@ -59,8 +42,8 @@
 (global-hl-line-mode 1)
 (setq hl-line-sticky-flag t)
 (set-face-background 'hl-line "#111111")
-(set-face-background 'hl-line "#dddddd")
-(set-face-foreground 'hl-line "#000000")
+;;(set-face-background 'hl-line "#dddddd")
+;;(set-face-foreground 'hl-line "#000000")
 
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
 (global-set-key (kbd "C-<f5>") 'linum-mode)    
@@ -107,3 +90,14 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(cua-mode t nil (cua-base)))
+
+
+
+(global-set-key [f3] 'shell)

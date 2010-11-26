@@ -1,8 +1,15 @@
-# DO NOT EDIT!  This file will be overwritten by LXAppearance.
-# Any customization should be done in ~/.gtkrc-2.0.mine
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="ClearlooksClassic"
-gtk-icon-theme-name="gnome-tribute"
+gtk-theme-name="elementary"
+gtk-icon-theme-name="elementary_2.2"
 gtk-font-name="Droid Sans 8"
-gtk-toolbar-style=0
+gtk-toolbar-style=GTK_TOOLBAR_ICONS
+gtk-toolbar-icon-size=GTK_ICON_SIZE_SMALL_TOOLBAR
+gtk-cursor-theme-name="DMZ-White"
+gtk-cursor-theme-size=0
+gtk-button-images=FALSE
+gtk-menu-images=FALSE
+gtk-enable-event-sounds=FALSE
+gtk-enable-input-feedback-sounds=FALSE
 include "/home/yigit/.gtkrc-2.0.mine"
