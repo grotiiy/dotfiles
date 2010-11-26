@@ -128,14 +128,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --XF86Launch1 :1008FF41
     , ((0 , 0x1008FF41), spawn "rhythmbox")
 
-    -- absolute radio
+    -- Absolute Radio
     , ((modm,               xK_a     ), spawn "rhythmbox-client --play-uri http://mp3-vr-128.as34763.net:80/")
-    -- uppsala radio
-    , ((modm,               xK_u     ), spawn "rhythmbox-client --play-uri http://109.74.198.181:8000/first")
+    -- Chromium
+    , ((modm,               xK_c     ), spawn "chromium-browser")
  
     -- Restart xmonad
     , ((modm              , xK_q     ), restart "xmonad" True)
-    
+   
     -- Combined Layout
     , ((modm,                 xK_Right), sendMessage $ Go R)
     , ((modm,                 xK_Left ), sendMessage $ Go L)

@@ -26,5 +26,10 @@ fi
 # Setting Background image with feh
 sh /home/yigit/.fehbg &
 
+# ssh-agent
+eval `ssh-agent`
+gnome-terminal -e ssh-add &
+
 # Launch WM
-exec ssh-agent ck-launch-session xmonad
+exec ck-launch-session xmonad
+

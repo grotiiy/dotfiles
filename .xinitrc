@@ -9,5 +9,6 @@ BC#!/bin/sh
 export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
+export BROWSER=chromium-browser
 /home/yigit/.scripts/start_xmonad.sh
 #exec gnome-session
