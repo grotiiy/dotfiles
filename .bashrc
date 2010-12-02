@@ -70,3 +70,7 @@ alias emac="emacsclient -t"
 
 export LIBGL_DRIVERS_PATH=/usr/lib32/fglrx/dri/
 
+
+#swap ctrl with caps lock
+
+xmodmap ~/.xmodmap

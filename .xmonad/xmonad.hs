@@ -55,7 +55,7 @@ myxftFont	    = "xft:Sans:pixelsize=8"
 
 -- Workspaces {{{
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["www", "general", "chat", "music", "code" ,"remote", "transmission", "8", "todo"] 
+myWorkspaces = ["www", "general", "chat", "music", "code" ,"remote", "transmission", "8", "9"] 
 -- }}}
  
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
