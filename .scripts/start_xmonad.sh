@@ -15,6 +15,10 @@ xsetroot -cursor_name left_ptr -solid '#262729' &
 # Set xflux for Istanbul
 xflux -l 41.02 -g 28.58 &
 
+# Set unclutter to remove the mouse
+#unclutter &
+
+
 # Load gnome settings
 #gnome-settings-daemon
 
@@ -24,11 +28,14 @@ if [ -x /usr/bin/nm-applet ] ; then
 fi
 
 # Setting Background image with feh
-sh /home/yigit/.fehbg &
+#sh /home/yigit/.fehbg &
 
 # ssh-agent
 eval `ssh-agent`
 gnome-terminal -e ssh-add &
+
+# Set Wallpaper
+/home/yigit/set_wallpaper.py&
 
 # Launch WM
 exec ck-launch-session xmonad

@@ -32,4 +32,4 @@ out_to_x no
 use_spacer none
 
 TEXT
-${exec /home/yigit/.scripts/rhythmbox.sh} | ^fg()cpu ^fg()$cpu% ^fg()vol ${exec /home/yigit/.scripts/vol.sh} ${mixer} ^fg()bat ^fg()${battery_percent BAT0}% ^fg()| ${time %d %b %H:%M} 
+${exec /home/yigit/.scripts/rhythmbox.sh} | ^fg()cpu $cpu% vol ${exec /home/yigit/.scripts/vol.sh} bat ${battery_percent BAT0}% ${time %d %b %H:%M} 

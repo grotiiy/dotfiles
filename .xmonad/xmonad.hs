@@ -29,7 +29,9 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Util.Run (spawnPipe)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
- 
+
+import XMonad.Actions.GridSelect
+     
 import System.IO (hPutStrLn)
 -- }}}
  
@@ -39,8 +41,8 @@ myNormalBGColor     = "#262729"
 myFocusedBGColor    = "#414141"
 myNormalFGColor     = "#a1a1a1"
 myFocusedFGColor    = "#cccccc"
---myBorderColor	    = "#FF350D"
-myBorderColor = "#000000"
+myBorderColor	    = "#FF350D"
+--myBorderColor = "#000000"
 myUrgentFGColor     = "#ff0000"
 myUrgentBGColor     = myNormalBGColor
 mySeperatorColor    = "#2e3436"
@@ -64,13 +66,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
  
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu -nb black -nf darkgrey -sf red -sb black -fn -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1` && eval \"exec $exe\"") 
+    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu -nb darkred -nf black -sf black -sb darkorange -fn -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1` && eval \"exec $exe\"") 
     -- close focused window 
     , ((modm .|. shiftMask, xK_c     ), kill)
  
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
- 
+
+--    , ((modm, xK_Caps_Lock), sendMessage $ Toggle FULL) 
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
  
@@ -119,8 +122,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
+    -- XF86KbdBrightnessUp
+    , ((0 , 0x1008ff02), spawn "/home/yigit/.scripts/brightnessinc")
+    -- XF86KbdBrightnessDown
+    , ((0 , 0x1008ff03), spawn "/home/yigit/.scripts/brightnessdec")
+
     -- XF86AudioMute
     , ((0 , 0x1008ff12), spawn "amixer -q set Master toggle")
+    -- XF86AudioMedia
+    , ((0 , 0x1008ff32), spawn "amixer -q set Master toggle")
+
     -- XF86AudioLowerVolume
     , ((0 , 0x1008ff11), spawn "amixer -q set Master 1- unmute")
     -- XF86AudioRaiseVolume
@@ -135,8 +146,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     -- Restart xmonad
     , ((modm              , xK_q     ), restart "xmonad" True)
-   
-    -- Combined Layout
+
+    -- GridSelect
+    , ((modm, xK_g), goToSelected defaultGSConfig)
+    
+   -- Combined Layout
     , ((modm,                 xK_Right), sendMessage $ Go R)
     , ((modm,                 xK_Left ), sendMessage $ Go L)
     , ((modm,                 xK_Up   ), sendMessage $ Go U)
@@ -200,16 +214,17 @@ main = do
 myManageHook = composeAll [
         className   =? "google-chrome"       --> doF(W.shift "www"),
         className   =? "Pidgin"              --> doF(W.shift "chat"),
-        className 	=? "Gwibber"             --> doF(W.shift "chat"),
+        className   =? "Gwibber"             --> doF(W.shift "chat"),
         className   =? "Empathy"             --> doF(W.shift "chat"),
         className   =? "Rhythmbox"           --> doF(W.shift "music"),
-		className   =? "Transmission"        --> doF(W.shift "transmission"),
+	className   =? "Transmission"        --> doF(W.shift "transmission"),
         className   =? "Skype"               --> doF(W.shift "chat"),
         className   =? "Trayer"              --> doIgnore,
-		className 	=? "Panel"				 --> doIgnore,
-		className 	=? "Tasque"				 --> doF(W.shift "todo"),
-		resource 	=? "gtodo"				 --> doF(W.shift "todo"),
-		resource 	=? "trayer" 			 --> doIgnore,
+	className 	=? "Panel"				 --> doIgnore,
+	className 	=? "Tasque"				 --> doF(W.shift "todo"),
+
+	resource 	=? "trayer" 			 --> doIgnore,
+	resource 	=? "teeworlds" 			 --> doIgnore,
 
 		isFullscreen   						 --> doFullFloat
     ]

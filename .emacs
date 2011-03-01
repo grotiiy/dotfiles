@@ -79,11 +79,12 @@
 (require 'auto-install)
 (setq auto-install-directory "~/.emacs.d/auto-install/")
 
-(autoload 'twitter-get-friends-timeline "twitter" nil t)
-(autoload 'twitter-status-edit "twitter" nil t)
-(global-set-key "\C-xt" 'twitter-get-friends-timeline)
+;;(autoload 'twitter-get-friends-timeline "twitter" nil t)
+;;(autoload 'twitter-status-edit "twitter" nil t)
+;;(global-set-key "\C-xt" 'twitter-get-friends-timeline)
 
-(add-hook 'twitter-status-edit-mode-hook 'longlines-mode)
+
+;;(add-hook 'twitter-status-edit-mode-hook 'longlines-mode)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,3 +102,6 @@
 
 
 (global-set-key [f3] 'shell)
+
+(put 'downcase-region 'disabled nil)
+

@@ -1,4 +1,4 @@
-BBC#!/bin/sh
+BBBC#!/bin/sh
 
 #
 # ~/.xinitrc

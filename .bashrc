@@ -63,14 +63,16 @@ alias brightness='sudo nano /sys/class/backlight/acpi_video0/brightness'
 PATH=$PATH:/sbin
 
 
-EDITOR="emacsclient -t"
-VISUAL="emacsclient -t" 
-alias nano="emacsclient -t"
-alias emac="emacsclient -t"
+EDITOR="emacs"
+VISUAL="emacs" 
+alias nano="emacs"
+alias chromium-browser="conkeror"
 
 export LIBGL_DRIVERS_PATH=/usr/lib32/fglrx/dri/
 
 
 #swap ctrl with caps lock
 
-xmodmap ~/.xmodmap
+#xmodmap ~/.xmodmap
+
+
