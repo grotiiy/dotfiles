@@ -45,7 +45,13 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 
-PROMPT_COMMAND='PS1="\[\033[0;33m\]\`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W";else echo "\\w";fi\` \$\[\033[0m\] ";'
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \W \[\033[31m\]\ \[\033[00m\]$\[\033[00m\] "
+
+PROMPT_COMMAND='PS1="\[\033[0;33m\]\`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W";else echo "\\w";fi\` \$\[\033[0m\] $(parse_git_branch) ";'
 
 
 #lightweight programlar
@@ -66,7 +72,7 @@ PATH=$PATH:/sbin
 EDITOR="emacs"
 VISUAL="emacs" 
 alias nano="emacs"
-alias chromium-browser="conkeror"
+alias eclipse="/home/yigit/eclipse/eclipse"
 
 export LIBGL_DRIVERS_PATH=/usr/lib32/fglrx/dri/
 
@@ -76,3 +82,5 @@ export LIBGL_DRIVERS_PATH=/usr/lib32/fglrx/dri/
 #xmodmap ~/.xmodmap
 
 
+export GIT_PROXY_COMMAND=~/connect
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages

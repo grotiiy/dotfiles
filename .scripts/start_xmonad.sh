@@ -18,25 +18,32 @@ xflux -l 41.02 -g 28.58 &
 # Set unclutter to remove the mouse
 #unclutter &
 
+#gnome-keyring-daemon&
+
 
 # Load gnome settings
 #gnome-settings-daemon
 
-# Network Manager
-if [ -x /usr/bin/nm-applet ] ; then
-   sleep 3 && nm-applet --sm-disable &
-fi
+
+# wicd
+
+sleep 5 && wicd-gtk &
+
+
 
 # Setting Background image with feh
 #sh /home/yigit/.fehbg &
 
 # ssh-agent
 eval `ssh-agent`
+
 gnome-terminal -e ssh-add &
 
 # Set Wallpaper
-/home/yigit/set_wallpaper.py&
+#/home/yigit/set_wallpaper.py&
 
 # Launch WM
 exec ck-launch-session xmonad
+#exec xmonad
+
 

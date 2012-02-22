@@ -27,10 +27,6 @@
 (color-theme-initialize)
 (setq color-theme-is-global t)
 
-;;(color-theme-mistyday)
-
-(color-theme-arjen)
-
 
 (setq inhibit-startup-message t)
 (xterm-mouse-mode)
@@ -42,8 +38,6 @@
 (global-hl-line-mode 1)
 (setq hl-line-sticky-flag t)
 (set-face-background 'hl-line "#111111")
-;;(set-face-background 'hl-line "#dddddd")
-;;(set-face-foreground 'hl-line "#000000")
 
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
 (global-set-key (kbd "C-<f5>") 'linum-mode)    
@@ -58,39 +52,15 @@
 
 (column-number-mode 1)
 
-
-
-;;git
-
-;;(setq load-path (cons (expand-file-name "/usr/share/doc/git-core/contrib/emacs") load-path))
-;;(require 'vc-git)
-;;(when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
-;;(require 'git)
-;;(autoload 'git-blame-mode "git-blame"
-;;  "Minor mode for incremental blame for Git." t)
-
-
-(require 'edit-server)
-(edit-server-start)
-(setq edit-server-new-frame nil)
-
-
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+
 (require 'auto-install)
 (setq auto-install-directory "~/.emacs.d/auto-install/")
 
-;;(autoload 'twitter-get-friends-timeline "twitter" nil t)
-;;(autoload 'twitter-status-edit "twitter" nil t)
-;;(global-set-key "\C-xt" 'twitter-get-friends-timeline)
+(require 'auto-complete)
+(global-auto-complete-mode t)
 
 
-;;(add-hook 'twitter-status-edit-mode-hook 'longlines-mode)
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -100,8 +70,19 @@
  '(cua-mode t nil (cua-base)))
 
 
-
 (global-set-key [f3] 'shell)
 
 (put 'downcase-region 'disabled nil)
 
+(require 'color-theme-almost-monokai)
+;;(color-theme-arjen)
+(color-theme-almost-monokai)
+
+
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+(setq ropemacs-enable-shortcuts nil)
+(setq ropemacs-local-prefix "C-c C-p")
+
+
+(global-set-key (kbd "M-,") 'rope-lucky-assist)

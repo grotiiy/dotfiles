@@ -5,7 +5,7 @@ import System.Exit
 
 import XMonad
 import XMonad.Layout
-import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.ThreeColumns
@@ -26,6 +26,8 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog   (PP(..), dynamicLogWithPP, wrap, defaultPP)
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops 
 import XMonad.Util.Run (spawnPipe)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -127,6 +129,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- XF86KbdBrightnessDown
     , ((0 , 0x1008ff03), spawn "/home/yigit/.scripts/brightnessdec")
 
+    , ((modm , xK_i), spawn "/home/yigit/.scripts/brightnessinc")
+    , ((modm , xK_d), spawn "/home/yigit/.scripts/brightnessdec")
+
+
     -- XF86AudioMute
     , ((0 , 0x1008ff12), spawn "amixer -q set Master toggle")
     -- XF86AudioMedia
@@ -137,18 +143,26 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- XF86AudioRaiseVolume
     , ((0 , 0x1008ff13), spawn "amixer -q set Master 1+ unmute")
     --XF86Launch1 :1008FF41
-    , ((0 , 0x1008FF41), spawn "rhythmbox")
+    -- , ((0 , 0x1008FF41), spawn "rhythmbox")
+    
+
+    , ((0 , 0x1008FF41), spawn "/opt/google/chrome/google-chrome '--app=http://music.google.com/music/listen'")
+
 
     -- Absolute Radio
     , ((modm,               xK_a     ), spawn "rhythmbox-client --play-uri http://mp3-vr-128.as34763.net:80/")
-    -- Chromium
-    , ((modm,               xK_c     ), spawn "chromium-browser")
+    -- Chrome
+    , ((modm,               xK_c     ), spawn "google-chrome --ignore-gpu-blacklist")
+
+    -- Chrome
+    , ((modm,               xK_m     ), spawn "/home/yigit/programlar/minecraft")
+
  
     -- Restart xmonad
     , ((modm              , xK_q     ), restart "xmonad" True)
 
     -- GridSelect
-    , ((modm, xK_g), goToSelected defaultGSConfig)
+--    , ((modm, xK_g), goToSelected defaultGSConfig)
     
    -- Combined Layout
     , ((modm,                 xK_Right), sendMessage $ Go R)
@@ -197,13 +211,15 @@ main = do
         focusedBorderColor = myBorderColor,
         --defaultGaps = [(16,0,0,0)],
         manageHook = manageHook defaultConfig <+> myManageHook,
-        layoutHook = globalLayout,
+--	handleEventHook    = fullscreenEventHook, 
+        layoutHook = smartBorders(globalLayout),
         workspaces = myWorkspaces,
         logHook = dynamicLogWithPP $ myPP statusBarPipe,
-        keys = myKeys
+        keys = myKeys,
+	startupHook = setWMName "LG3D"
     }
     where
-        globalLayout = avoidStruts (tiled ||| Mirror tiled ||| Full ||| threeColMid ||| combine) ||| Full
+        globalLayout =  avoidStruts (tiled ||| Mirror tiled ||| Full ||| threeColMid ||| combine) ||| Full
 
         tiled = ThreeCol 1 (3/100) (1/3)
         threeColMid =  ThreeColMid 1 (50/100) (1/3) 
