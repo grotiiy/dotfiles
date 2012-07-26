@@ -196,7 +196,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 statusBarCmd= "dzen2 -p -h 16 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 900 -sa c -fn '" ++ myFont ++ "'"
 
 myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '900' -y '0' -h '16' -w '640' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
-myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '18' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' "
+myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '18' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFontoooo ++ "' "
  
 -- Main {{{
 main = do
