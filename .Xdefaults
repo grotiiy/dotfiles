@@ -1,24 +1,39 @@
-URxvt*background: #1A1A1A
-URxvt*foreground: #ffffff
+#URxvt*background: #1A1A1A
+#URxvt*foreground: #ffffff
 URxvt*termName: xterm-color
 URxvt.scrollBar: false
 
-URxvt*font: xft: Inconsolata:size=16
+#URxvt*font: xft: Inconsolata:size=16
 
-Xft.font: xft: Inconsolata:size=16
+#Xft.font: xft: Inconsolata:size=16
+
+URxvt*font: xft: SourceCodePro:size=14
+#URxvt*boldFont: xft: SourceCodePro:size=16
+Xft.font: xft: SourceCodePro:size=10
+#Xft*boldFont: xft: SourceCodePro:size=16
+
+
+URxvt.depth: 32
 
 Xft.antialias: true
 Xft.dpi: 96
 Xft.hinting: true
-Xft.hintstyle: hintslight
+Xft.hintstyle: hintfull
 Xft.autohint: 1
 Xft.rgba: rgb
-
+Xft.lcdfilter: lcddefault
 
 URxvt.perl-ext-common:  default,matcher,clipboard
 URxvt.urlLauncher:      /usr/bin/chromium
 URxvt.matcher.button:   1
 
+! Xresources
+URxvt*background:	#000C1A
+URxvt*foreground:	#ACB4BF
+URxvt*cursorColor:	#335A80
+
+*background:		#CFCFD9
+*foreground:		#1C2027
 
 ! black
 *color0: #192033
@@ -44,3 +59,5 @@ URxvt.matcher.button:   1
 ! white
 *color7: #77858C
 *color15: #C0C0C0
+
+

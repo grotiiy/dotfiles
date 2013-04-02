@@ -1,1 +1,1 @@
-amixer sget Master | grep "Left: Playback" | awk  '{print $5}' | tr -d '[]'
+amixer sget Master | grep "Mono: Playback" | awk  '{print $4}' | tr -d '[]'

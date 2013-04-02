@@ -1,86 +1,102 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#
+# ~/.bashrc
+#
+
+
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+[[ $- != *i* ]] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoreboth
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias top='htop'
 
-# append to the history file, don't overwrite it
-shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+export EDITOR="emacs"
+export VISUAL="emacs"
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+#PS1='[\u@\h \W]\$ '
 
 color_prompt=yes
 
-export TERM='xterm-256color'
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    git branch 2> /dev/null | sed  -e 's/* \(.*\)/(\1)/'
 }
 
-export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \W \[\033[31m\]\ \[\033[00m\]$\[\033[00m\] "
+parse_virtual_env(){
+    if test -z $VIRTUAL_ENV; then
+	VENV=""
+    else
+	VENV=`basename $VIRTUAL_ENV`
+    fi
+    echo $VENV
 
-PROMPT_COMMAND='PS1="\[\033[0;33m\]\`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W";else echo "\\w";fi\` \$\[\033[0m\] $(parse_git_branch) ";'
+}
 
+#export PS1="\[\033[00m\]\u@\h\[\033[01;34m\]\W\[\033[31m\]\\[\033[00m\]$\[\033[00m\] "
 
-#lightweight programlar
+#PROMPT_COMMAND='PS1="\[\033[0;33m\]\`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W";else echo "\\w";fi\` \$\[\033[0m\] ";'
 
-alias eog='gpicview'
-#alias nautilus='pcmanfm'
-alias altitude='/pkd/programlar/altitude/altitude'
-#alias empathy='pidgin'
-alias gnome-terminal='gnome-terminal --disable-factory'
-alias top="htop"
-
-alias brightness='sudo nano /sys/class/backlight/acpi_video0/brightness'
-
-
-PATH=$PATH:/sbin
+#PROMPT_COMMAND='PS1="\[\033[0;33m\]\`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W";else echo "\\w";fi\` \$\[\033[0m\] \e[1;31m\]$(parse_virtual_env)$(parse_git_branch)\e[0m\] ";'
 
 
-EDITOR="emacs"
-VISUAL="emacs" 
-alias nano="emacs"
-alias eclipse="/home/yigit/eclipse/eclipse"
+#alias python=python
+alias heroku=/opt/heroku-client/heroku
+alias c='xclip -selection c'
+alias diff=colordiff
 
-export LIBGL_DRIVERS_PATH=/usr/lib32/fglrx/dri/
+export LESS_TERMCAP_us=$'\e[32m'  
+export LESS_TERMCAP_ue=$'\e[0m'  
+export LESS_TERMCAP_md=$'\e[1;31m'  
+export LESS_TERMCAP_me=$'\e[0m'  
+export LESS=-R
+
+export PYMACS_PYTHON=python2
+
+export PERL_LOCAL_LIB_ROOT="/home/yigit/perl5";
+export PERL_MB_OPT="--install_base /home/yigit/perl5";
+export PERL_MM_OPT="INSTALL_BASE=/home/yigit/perl5";
+export PERL5LIB="/home/yigit/perl5/lib/perl5/i686-linux-thread-multi:/home/yigit/perl5/lib/perl5";
+export PATH="/home/yigit/perl5/bin:$PATH";
 
 
-#swap ctrl with caps lock
-
-#xmodmap ~/.xmodmap
+[[ -f ~/.bash_profile ]] && . ~/.bash_profile
 
 
-export GIT_PROXY_COMMAND=~/connect
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages
+function roll() {
+    ssh $1@sentry.hipo.biz "deploy $2 $1 $3 0 pipforce"
+}
+
+alias ssh_mobilicity='ssh -t mobilicity@hub.hipo.biz ssh mobilicity@mobilicity.ca'
+alias ssh_moviebox='ssh -t moviebox@hub.hipo.biz ssh ubuntu@moviebox'
+alias ssh_bestofturkey='ssh -t best_of_turkey@hub.hipo.biz ssh ubuntu@bestofturkey'
+alias ssh_blogto='ssh -t blogto@hub.hipo.biz ssh ubuntu@profiles.blogto.com'
+alias ssh_choicelr='ssh -t choicelr@hub.hipo.biz ssh ubuntu@choicelr'
+alias ssh_strum='ssh -t strum@hub.hipo.biz ssh ubuntu@strum.co'
+alias ssh_passbuildr='ssh -t passbuildr@hub.hipo.biz ssh ubuntu@passbuildr'
+
+export AWS_AUTO_SCALING_HOME=/home/yigit/hipo/aws/AutoScaling-1.0.61.1
+export PATH=$PATH:$AWS_AUTO_SCALING_HOME/bin 
+export AWS_CREDENTIAL_FILE=$AWS_AUTO_SCALING_HOME/credential-file-name
+
+
+export LIBVA_DRIVER_NAME=vdpau
+export VDPAU_DRIVER=r600
+LIBVA_DRIVERS_PATH=/usr/lib/vdpau
+
+alias python=python2
+
+alias emacs='emacsclient -t -a ""'
+alias e='emacsclient -t -a ""'
+
+
+#aws bash complete
+complete -C aws_completer aws
+export PATH=$PATH:/home/yigit/android-sdks/platform-tools
+
+
+export PATH=$PATH:/home/yigit/.gem/ruby/1.9.1/bin
+
+shopt -s cdspell

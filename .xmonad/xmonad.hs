@@ -1,6 +1,4 @@
 -- Imports {{{
-
-
 import System.Exit
 
 import XMonad
@@ -13,6 +11,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.StackTile
+import XMonad.Layout.Spiral
 import XMonad.Layout.IM
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.Reflect
@@ -22,12 +21,13 @@ import XMonad.Layout.WindowNavigation
 
 
 import XMonad.Hooks.ManageDocks
-
+import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog   (PP(..), dynamicLogWithPP, wrap, defaultPP)
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops 
+import XMonad.Hooks.ICCCMFocus
 import XMonad.Util.Run (spawnPipe)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -36,25 +36,37 @@ import XMonad.Actions.GridSelect
      
 import System.IO (hPutStrLn)
 -- }}}
+
+
+-- | Whether focus follows the mouse pointer.
+focusMouse :: Bool
+focusMouse = False
  
 -- Control Center {{{
 -- Colour scheme {{{
-myNormalBGColor     = "#262729"
-myFocusedBGColor    = "#414141"
+
+-- myNormalBGColor     = "#262729"
+myNormalBGColor = "#000C1A"
+--myFocusedBGColor    = "#414141"
+myFocusedBGColor    = "#222f3c"
 myNormalFGColor     = "#a1a1a1"
 myFocusedFGColor    = "#cccccc"
-myBorderColor	    = "#FF350D"
+--myBorderColor	    = "#FF350D"
+myBorderColor	    = "#b27d12"
 --myBorderColor = "#000000"
 myUrgentFGColor     = "#ff0000"
 myUrgentBGColor     = myNormalBGColor
-mySeperatorColor    = "#2e3436"
+mySeperatorColor    = "#b27d12"
 -- }}}
 
 -- Icon packs can be found here:
 -- http://robm.selfip.net/wiki.sh/-main/DzenIconPacks
 myBitmapsDir        = "/home/yigit/.share/icons/dzen"
-myFont              = "-*-terminus-medium-*-*-*12-*-*-*-*-*-u"
-myxftFont	    = "xft:Sans:pixelsize=8"
+--myFont              = "-*-terminus-medium-*-*-*10-*-*-*-*-iso8859-9"
+myFont 	       = "-*-terminus-*-*-normal-*-12-120-*-*-*-*-iso8859-9"
+--myxftFont              = "-*-terminus-medium-*-*-*10-*-*-*-*-iso8859-9"
+myxftFont 	       = "-*-terminus-*-*-normal-*-12-120-*-*-*-*-iso8859-9"
+--myxftFont	    = "xft:Sans"
 -- }}}
 
 -- Workspaces {{{
@@ -68,7 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
  
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu -nb darkred -nf black -sf black -sb darkorange -fn -*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1` && eval \"exec $exe\"") 
+    , ((modm,               xK_p     ), spawn "exe=`dmenu_run -nb darkred -nf black -sf black -sb darkorange  -fn -*-terminus-normal-*-*-*-12-*-*-*-*-*-iso8859-9 ` && eval \"exec $exe\"") 
     -- close focused window 
     , ((modm .|. shiftMask, xK_c     ), kill)
  
@@ -84,7 +96,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
  
     -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
- 
+      
     -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
  
@@ -146,23 +158,23 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((0 , 0x1008FF41), spawn "rhythmbox")
     
 
-    , ((0 , 0x1008FF41), spawn "/opt/google/chrome/google-chrome '--app=http://music.google.com/music/listen'")
+    , ((0 , 0x1008FF41), spawn "chromium '--app=http://music.google.com/music/listen'")
 
 
     -- Absolute Radio
     , ((modm,               xK_a     ), spawn "rhythmbox-client --play-uri http://mp3-vr-128.as34763.net:80/")
     -- Chrome
-    , ((modm,               xK_c     ), spawn "google-chrome --ignore-gpu-blacklist")
+    , ((modm,               xK_c     ), spawn "chromium")
 
-    -- Chrome
-    , ((modm,               xK_m     ), spawn "/home/yigit/programlar/minecraft")
+    -- Minecraft
+--    , ((modm,               xK_m     ), spawn "/home/yigit/programlar/minecraft")
 
  
     -- Restart xmonad
     , ((modm              , xK_q     ), restart "xmonad" True)
 
     -- GridSelect
---    , ((modm, xK_g), goToSelected defaultGSConfig)
+    , ((modm, xK_g), goToSelected defaultGSConfig)
     
    -- Combined Layout
     , ((modm,                 xK_Right), sendMessage $ Go R)
@@ -193,42 +205,50 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
  
-statusBarCmd= "dzen2 -p -h 16 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 900 -sa c -fn '" ++ myFont ++ "'"
+statusBarCmd= "dzen2 -p -h 16 -ta l -bg '" ++ myNormalBGColor ++ "' -fg '" ++ myNormalFGColor ++ "' -w 1000 -sa c -fn '" ++ myFont ++ "'"
 
-myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '900' -y '0' -h '16' -w '640' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
-myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '18' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFontoooo ++ "' "
- 
+myTopBar = "conky -c /home/yigit/.conkytop | dzen2 -x '1000' -y '0' -h '16' -w '600' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' " 
+myTimeBar = "conky -c /home/yigit/.conkysaat | dzen2 -x '1550' -y '0' -h '18' -w '50' -ta 'r' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' "
+
+
+myLogHook :: X()
+myLogHook = fadeInactiveLogHook fadeAmount
+	  where fadeAmount = 0.90
+
 -- Main {{{
 main = do
-    statusBarPipe <- spawnPipe statusBarCmd
+
+    statusBarPipe <- spawnPipe statusBarCmd	
     conkytop <- spawnPipe myTopBar
     xmonad $ withUrgencyHook NoUrgencyHook $defaultConfig {
         modMask = mod4Mask,
-        borderWidth = 1,
-        --terminal = "urxvtc -imlocale en-US.UTF-8",
-        terminal = "gnome-terminal",
+        borderWidth = 0,
+        terminal = "urxvtc -imlocale en-US.UTF-8",
 	normalBorderColor = myNormalBGColor,
         focusedBorderColor = myBorderColor,
-        --defaultGaps = [(16,0,0,0)],
         manageHook = manageHook defaultConfig <+> myManageHook,
---	handleEventHook    = fullscreenEventHook, 
+	handleEventHook    = fullscreenEventHook, 
         layoutHook = smartBorders(globalLayout),
         workspaces = myWorkspaces,
-        logHook = dynamicLogWithPP $ myPP statusBarPipe,
-        keys = myKeys,
-	startupHook = setWMName "LG3D"
+        logHook = do
+		dynamicLogWithPP $ myPP statusBarPipe
+		takeTopFocus
+		myLogHook,
+	keys = myKeys,
+	startupHook = setWMName "LG3D",
+	focusFollowsMouse  = focusMouse
+
     }
     where
-        globalLayout =  avoidStruts (tiled ||| Mirror tiled ||| Full ||| threeColMid ||| combine) ||| Full
+        globalLayout =  avoidStruts (tiled ||| Mirror tiled ||| Full ||| threeColMid ||| combine ||| spiral(6/7)) ||| noBorders (Full)
 
-        tiled = ThreeCol 1 (3/100) (1/3)
+        tiled = ThreeCol 1 (3/100) (1/2)
         threeColMid =  ThreeColMid 1 (50/100) (1/3) 
         combine = combineTwo (TwoPane 0.5 0.5) (tiled) (tiled)
 -- }}}
  
 -- Window rules (floating, tagging, etc) {{{
 myManageHook = composeAll [
-        className   =? "google-chrome"       --> doF(W.shift "www"),
         className   =? "Pidgin"              --> doF(W.shift "chat"),
         className   =? "Gwibber"             --> doF(W.shift "chat"),
         className   =? "Empathy"             --> doF(W.shift "chat"),
@@ -236,13 +256,11 @@ myManageHook = composeAll [
 	className   =? "Transmission"        --> doF(W.shift "transmission"),
         className   =? "Skype"               --> doF(W.shift "chat"),
         className   =? "Trayer"              --> doIgnore,
-	className 	=? "Panel"				 --> doIgnore,
-	className 	=? "Tasque"				 --> doF(W.shift "todo"),
+	className   =? "Panel"	      	     --> doIgnore,
+	resource    =? "trayer" 	     --> doIgnore,
+	resource    =? "teeworlds" 	     --> doIgnore,
 
-	resource 	=? "trayer" 			 --> doIgnore,
-	resource 	=? "teeworlds" 			 --> doIgnore,
-
-		isFullscreen   						 --> doFullFloat
+	isFullscreen   			     --> doFullFloat
     ]
 -- }}}
  
@@ -269,3 +287,4 @@ myPP handle = defaultPP {
         ppOutput  = hPutStrLn handle
 }
 -- }}} 
+

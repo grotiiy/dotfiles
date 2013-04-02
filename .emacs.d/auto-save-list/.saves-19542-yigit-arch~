@@ -1,0 +1,8 @@
+/home/yigit/hipo/mobilicity/conf/nginx.conf
+/home/yigit/hipo/mobilicity/conf/#nginx.conf#
+/home/yigit/hipo/passbuildr/conf/apache.conf
+/home/yigit/hipo/passbuildr/conf/#apache.conf#
+/home/yigit/hipo/dashboard/backend/nagios.py
+/home/yigit/hipo/dashboard/backend/#nagios.py#
+/home/yigit/hipo/dashboard/backend/codebase.py
+/home/yigit/hipo/dashboard/backend/#codebase.py#

@@ -1,0 +1,8 @@
+/home/yigit/hipo/strum/conf/gunicorn.conf
+/home/yigit/hipo/strum/conf/#gunicorn.conf#
+/home/yigit/hipo/strum/conf/celery_staging.conf
+/home/yigit/hipo/strum/conf/#celery_staging.conf#
+/home/yigit/hipo/strum/conf/nginx.conf
+/home/yigit/hipo/strum/conf/#nginx.conf#
+/home/yigit/hipo/strum/conf/celery_beta.conf
+/home/yigit/hipo/strum/conf/#celery_beta.conf#
