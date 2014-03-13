@@ -39,7 +39,7 @@
 
 (setq inhibit-startup-message t)
 (xterm-mouse-mode)
-(setq make-backup-files nil) 
+(setq make-backup-files nil)
 
 (setq-default py-indent-offset 2)
 
@@ -48,7 +48,7 @@
 (set-face-background 'hl-line "#111111")
 
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
-(global-set-key (kbd "C-<f5>") 'linum-mode)    
+(global-set-key (kbd "C-<f5>") 'linum-mode)
 (setq linum-format "%d ")
 (global-linum-mode 1)
 
@@ -130,4 +130,3 @@
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
-

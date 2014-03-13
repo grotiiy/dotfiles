@@ -1,4 +1,4 @@
-gtk-icon-theme-name="gnome-tribute"
+#gtk-icon-theme-name="gnome-tribute"
 gtk-icon-sizes="gtk-menu=16,16:\
                 gtk-button=16,16:\
                 gtk-small-toolbar=16,16:\

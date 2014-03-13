@@ -32,4 +32,4 @@ out_to_x no
 use_spacer none
 
 TEXT
-${exec /home/yigit/.scripts/rhythmbox.sh} | ^fg()cpu $cpu% vol ${exec /home/yigit/.scripts/vol.sh} bat ${battery_percent BAT0}% ${time %d %b %H:%M} 
+cpu $cpu% vol ${exec /home/yigit/.scripts/vol.sh} bat ${if_match ${battery_percent BAT0} <= 5 }^fg(\#ff0000)${battery_percent BAT0}%^fg()${time %d %b %H:%M} ${else}${if_match ${battery_percent BAT0} < 15 }^fg(\#ffaa00)${battery_percent BAT0}%^fg()${else}${battery_percent BAT0}% ${endif}${time %d %b %H:%M} 

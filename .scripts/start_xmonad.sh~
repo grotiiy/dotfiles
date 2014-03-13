@@ -1,5 +1,5 @@
-#!/bin/sh
- 
+OBOB#!/bin/sh
+
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
@@ -13,10 +13,10 @@
 xsetroot -cursor_name left_ptr -solid '#000C1A' &
 
 # Set xflux for Istanbul
-#xflux -l 41.02 -g 28.58 &
+xflux -l 41.02 -g 28.58 &
 
 # Set unclutter to remove the mouse
-#unclutter &
+unclutter &
 
 #gnome-keyring-daemon&
 
@@ -45,10 +45,25 @@ sh /home/yigit/.fehbg &
 # Set the trayer
 #sleep 3 && trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand false --width 60 --height 8 --transparent true --tint 0x262729  --widthtype pixel --alpha 0 &
 
+#xcompmgr
+xcompmgr -c &
+
+# Add the 3 lines below to Convert caps-lock into Control
+xmodmap -e 'remove Lock = Caps_Lock'
+xmodmap -e 'keysym Caps_Lock = Control_R'
+xmodmap -e 'add Control = Control_R'
+
+xmodmap -e 'remove Control = Control_L'
+xmodmap -e 'keysym Control_R = Caps_Lock'
+xmodmap -e 'add Lock = Caps_Lock'
+
+
+
+
+
+
+
 
 # Launch WM
+#exec startxfce4
 exec xmonad
-#exec ck-launch-session xmonad
-#exec xmonad
-
-
